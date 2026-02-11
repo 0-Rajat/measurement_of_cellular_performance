@@ -1,0 +1,130 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{CS\_490\_RND}
+\author{Rajat Ranjan Meher(25m0777) \\[0.2cm]
+\textbf{Instructor:-} Bhaskaran Raman\\
+[0.2cm]}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+\section{Project Summary}
+This project collect user feedback after cellular call and correlate it with network parameters. The Android system automatically collect data after a phone call ends and send it to a server (in the project's case a python server) to store and peform analysis. 
+\section{System Overview}
+
+The system follows a simple client-server architecture.
+
+\textbf{Android Client:} Detects call end events, shows a feedback pop up, collects user input and network data.\par
+\textbf{Python Server:} Receives feedback data and stores it in a file.
+    
+
+
+Communication between the Android app and server happens using HTTP POST requests with JSON data using a REST API.
+
+
+
+\section{Android Components and Their Function}
+
+\subsection{Broadcast Receiver}
+
+\begin{itemize}
+    \item Listens for system events such as \textbf{PHONE\_STATE} and \textbf{BOOT\_COMPLETED}.
+    \item Detects when a call ends (IDLE state).
+    \item Starts the pop up service only when required.
+\end{itemize}
+
+\textbf{Purpose:} 
+Saving resources by enabling even driven execution rather then continuously running background service. 
+
+
+
+\subsection{Call State Logic}
+
+\begin{itemize}
+    \item Ignores RINGING and OFFHOOK states.
+    \item Triggers action only when phone state becomes IDLE.
+    \item Ensures feedback is shown only after the call ends.
+\end{itemize}
+
+
+
+\subsection{PopUP Service}
+
+\begin{itemize}
+    \item Displays a floating feedback form using \textbf{WindowManager}.
+    \item Collects user ratings such as call quality and audio issues.
+    \item Reads system data like signal strength, network type, and location.
+    \item Sends collected data to the backend server.
+    \item Removes itself after submission to avoid resource leakage.
+\end{itemize}
+
+\textbf{Purpose:} Collects feedback without interrupting user workflow.
+
+
+
+\section{Data Collected}
+
+\subsection{User-Reported Data}
+
+\begin{itemize}
+    \item Overall call quality (Good ,Fair, Poor)
+    \item Audio issues (echo, noise, call drop, etc.)
+    \item Environment (indoor, outdoor, vehicle)
+    \item Optional user comments
+\end{itemize}
+
+
+
+\subsection{Device-Reported Data}
+
+\begin{itemize}
+    \item Network type (2G , 3G , 4G , 5G)
+    \item Signal strength in dBm
+    \item GPS location (latitude, longitude)
+    \item Timestamp of call end
+\end{itemize}
+
+
+
+\section{Backend Python Server}
+
+\subsection{Server Functionality}
+
+\begin{itemize}
+    \item Implemented using Python Flask.
+    \item Exposes a REST API endpoint feedback.
+    \item Accepts JSON data via HTTP POST.
+    \item Appends received data to a \textbf{.jsonl} file.
+\end{itemize}
+
+
+
+\subsection{Data Storage}
+
+\begin{itemize}
+    \item Uses JSON Lines format for simplicity.
+    \item Each line represents one feedback entry.
+    \item Fast write performance and low overhead.
+\end{itemize}
+
+
+
+\section{Testing and Results}
+
+\begin{itemize}
+    \item Tested on multiple Android devices and versions.
+    \item Pop up appeared successfully after every call end.
+    \item Signal strength readings matched system values closely.
+    \item Data transmission to server was reliable.
+\end{itemize}
+
+
+
+\section{Conclusion}
+
+
+The project uses automated method to collect objective quality of real world cellular call and subjective QOE experience via pop up(overlay) and combining it to provide more valuable ,robust network measurements. 
+
+\end{document}
