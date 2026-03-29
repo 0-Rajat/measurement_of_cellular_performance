@@ -7,7 +7,7 @@
 [0.2cm]}
 % \vspace{20cm}
 \date{Even semster : 2026}
-% \textbf{Instructor}
+
 
 \begin{document}
 
@@ -60,4 +60,73 @@ For same string to use in different place use name and value inside values>theme
 \par \vspace{2mm}
 \textbf{New Terms :-} Singleton , LiveData , MODEL, VIEW and VIEWMODEl
 \par \vspace{2mm}
+
+\section{4th week (1st March - 7th March) (10 Hours)}
+\subsection{Objective:-Understanding Project Architecture for VoIP Measurement}
+\textbf{Project Understanding:-} Studied modified problem statement focusing on Voice-over-IP (VoIP) calls such as WhatsApp and Google Meet.\par
+\vspace{2mm}
+\textbf{Architecture:-} Learned Client-Server architecture where Android app periodically collects network data and communicates with Python backend.\par
+\vspace{2mm}
+\textbf{Modules Identified:-}
+\begin{itemize}
+\item Periodic Measurement Module (Timer-based triggering)
+\item Network Sensing Module (WiFi and Mobile data collection)
+\item Backend Aggregation Module
+\end{itemize}
+\vspace{2mm}
+\textbf{Android Concepts:-} Studied ConnectivityManager, WifiManager and background execution.\par
+\vspace{2mm}
+\textbf{Learnings:-} Understood that VoIP calls cannot be detected using Telephony APIs and require indirect measurement through network conditions.
+
+\section{5th week (8th March - 14th March) (10 Hours)}
+\subsection{Objective:-Implementation of Periodic Network Monitoring}
+\textbf{Coding Work:-}
+\begin{itemize}
+\item Implemented periodic task using Handler to trigger data collection
+\item Collected active network type (WiFi or Mobile) using ConnectivityManager
+\item Handled cases where no network is available
+\end{itemize}
+\vspace{2mm}
+\textbf{Manifest Work:-}
+\begin{itemize}
+\item Added permissions (ACCESS\_NETWORK\_STATE, ACCESS\_WIFI\_STATE)
+\item Configured app for background data collection
+\end{itemize}
+\vspace{2mm}
+\textbf{Learnings:-} Understood shift from event-driven system to time-based measurement for VoIP scenarios.
+
+\section{6th week (15th March - 21st March) (10 Hours)}
+\subsection{Objective:-Network Data Collection and User Feedback}
+\textbf{UI Design:-}
+\begin{itemize}
+\item Designed simple feedback interface for user-reported call quality
+\item Added RadioGroup for quality (Good, Fair, Poor)
+\item Included basic issue selection using CheckBoxes
+\end{itemize}
+\vspace{2mm}
+\textbf{Data Collection:-}
+\begin{itemize}
+\item Extracted WiFi signal strength (RSSI) using WifiManager
+\item Identified network type (WiFi / Mobile)
+\item Combined user feedback with network parameters
+\end{itemize}
+\vspace{2mm}
+\textbf{Learnings:-} Learned how to correlate user experience with underlying network conditions in VoIP calls.
+
+\section{7th week (22nd March - 31st March) (10 Hours)}
+\subsection{Objective:-Backend Integration and Data Transmission}
+\textbf{Backend Work:-}
+\begin{itemize}
+\item Studied Flask API for receiving periodic measurements
+\item Created structured JSON including quality, network type and signal strength
+\item Implemented HTTP POST request using OkHttp
+\end{itemize}
+\vspace{2mm}
+\textbf{System Integration:-}
+\begin{itemize}
+\item Integrated periodic measurement with data transmission
+\item Ensured data is sent asynchronously without blocking UI
+\end{itemize}
+\vspace{2mm}
+\textbf{Learnings:-} Understood full pipeline of VoIP performance measurement using indirect network monitoring.
 \end{document}
